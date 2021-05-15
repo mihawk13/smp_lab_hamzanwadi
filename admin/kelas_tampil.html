@@ -1,0 +1,60 @@
+ <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <i class="fa fa-dashboard"></i><a href="guru.php">  Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Kelas</li>'
+        ?>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Kelas</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Kode kelas</th>
+                  <th>Nama Kelas</th>
+                  <th>Opsi</th>
+              </thead>
+              <tbody>
+                <?php
+
+                $tampil = "SELECT * FROM kelas ORDER BY nama_kelas ASC";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel user
+                while($data = mysqli_fetch_array($sql))
+                 {
+                 ?>
+                 <tr>
+                 <td><?php echo "$data[kode_kelas]"?></td>
+                 <td><?php echo "$data[nama_kelas]"?></td>
+                 <td><a href="?page=editKelas&kode_kelas=<?php echo $data['kode_kelas']; ?>" data-toggle="tooltip" data-placement="top" title="Edit Data Kelas"><i class="fa fa-edit"></i></a>
+                 </td>
+                 </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+            <div class="box-footer">
+                <a href="?page=addKelas" name="tambah" class="btn btn-info"><i class="fa fa-plus"></i>   Tambah Kelas</a>
+              </div>
+          </div>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">
+          <?php $tgl=mktime(date("m"),date("d"),date("Y"));
+          echo date("d-M-Y", $tgl);
+         ?>
+        </div>
+      </div>
+</div>

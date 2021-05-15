@@ -1,0 +1,94 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       Tambah Data Siswa
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+        <li class="active">Tambah Data Siswa</li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Data Siswa</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="siswa_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">ID Pengguna</label>
+                  <input type="text" class="form-control" name="id_pengguna" readonly value="<?php
+                  include "../kode_otomatis.php";
+                  Kode_Auto("U","SELECT max(id_pengguna) as maxKode FROM users");
+                  ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">NIS</label>
+                  <input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Nama Siswa</label>
+                  <input type="text" class="form-control" name="nama" placeholder="Nama Siswa">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Tanggal Lahir</label>
+                  <input type="date" placeholder="YYYY-MM-DD" class="form-control" name="tgl_lahir">
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label class="control-label">Jenis Kelamin</label>
+                    <select name="jk" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="">-- Pilih Jenis Kelamin --</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Agama</label>
+                  <input type="text" class="form-control" name="agama" placeholder="Agama">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Alamat</label>
+                  <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                </div>
+                
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Status</label>
+                  <input type="text" class="form-control" name="status" value="Aktif" readOnly>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Username</label>
+                  <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+              <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewSiswa" class="btn btn-danger">Batal</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

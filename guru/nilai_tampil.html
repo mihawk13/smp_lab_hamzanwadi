@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../vendor/datatables/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="../vendor/datatables/buttons.dataTables.min.css">
+<style>
+th {
+    text-align: center;
+}
+th.p {
+    background-color: rgba(12, 46, 238, 0.473);
+}
+th.k {
+    background-color: rgba(200, 209, 75, 0.342);
+} 
+</style>
+</head>
+<body>
+<script type="text/javascript" language="Javascript1.2">
+          function pilih(smt){
+            if(smt=='0'){
+              location.replace("index.php?page=viewNilai");
+            }else{
+              location.replace("index.php?page=viewNilai&smt="+smt);
+            }
+          }
+        </script>
+<div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.php">Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Data Nilai Siswa</li>'
+        ?>
+      </ol>
+            <div class="col-xs-6 form-group">
+          <select name="smt" id="smt" onchange="pilih(this.value)" class="form-control">
+            <?php 
+            if(!isset($_GET['smt'])){ ?>
+              <option value="0" selected>Pilih Semester</option>
+              <option value="Ganjil">1 - Ganjil</option>
+              <option value="Genap">2 - Genap</option>
+            <?php }elseif($_GET['smt']=="Ganjil"){ ?>
+              <option value="0">Pilih Semester</option>
+              <option value="Ganjil" selected>1 - Ganjil</option>
+              <option value="Genap">2 - Genap</option>
+            <?php }elseif($_GET['smt']=="Genap"){ ?>
+              <option value="0">Pilih Semester</option>
+              <option value="Ganjil">1 - Ganjil</option>
+              <option value="Genap" selected>2 - Genap</option>
+            <?php } ?>
+          </select>
+
+          </div>
+        <?php
+        include"../conn/koneksi.php";
+                if(isset($_GET['smt'])){
+                  $smt=@$_GET['smt'];
+                  
+                  $query = "SELECT nl.nis,sw.nama_siswa,jd.nama_kelas,nl.semester,jd.nama_mp,nl.total_peng,nl.rata_peng,nl.konversi_peng,nl.total_terampil,nl.rata_terampil,nl.konversi_terampil FROM dtnilai AS nl
+                  INNER JOIN dtsiswa AS sw ON nl.nis = sw.nis
+                  INNER JOIN (SELECT dtjadwal.id_jadwal,dtmapel.nama_mp,kelas.nama_kelas FROM dtjadwal
+                  INNER JOIN dtmapel ON dtjadwal.kode_mp = dtmapel.kode_mp
+                  INNER JOIN kelas ON dtjadwal.kode_kelas = kelas.kode_kelas
+                  WHERE dtjadwal.id_guru = '$_SESSION[id_guru]' AND dtjadwal.id_thn_ajaran IN (SELECT id FROM tahun_ajaran WHERE status = 'Aktif')) AS jd ON nl.id_jadwal = jd.id_jadwal WHERE nl.semester='$smt'";
+                }else{
+                  $query = "SELECT nl.nis,sw.nama_siswa,jd.nama_kelas,nl.semester,jd.nama_mp,nl.total_peng,nl.rata_peng,nl.konversi_peng,nl.total_terampil,nl.rata_terampil,nl.konversi_terampil FROM dtnilai AS nl
+                  INNER JOIN dtsiswa AS sw ON nl.nis = sw.nis
+                  INNER JOIN (SELECT dtjadwal.id_jadwal,dtmapel.nama_mp,kelas.nama_kelas FROM dtjadwal
+                  INNER JOIN dtmapel ON dtjadwal.kode_mp = dtmapel.kode_mp
+                  INNER JOIN kelas ON dtjadwal.kode_kelas = kelas.kode_kelas
+                  WHERE dtjadwal.id_guru = '$_SESSION[id_guru]' AND dtjadwal.id_thn_ajaran IN (SELECT id FROM tahun_ajaran WHERE status = 'Aktif')) AS jd ON nl.id_jadwal = jd.id_jadwal";
+                }
+
+                $tampil=mysqli_query($koneksi,$query);
+                
+                if (!$tampil) {
+                  printf("Error: %s\n", mysqli_error($koneksi));
+                  exit();
+                }
+        ?>
+        </div>
+         <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Nilai Siswa</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="display table table-bordered" id="dataSiswa" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                <th colspan="5"></th>
+                <th class="p" colspan="3">Aspek Pengetahuan</th>
+                <th class="k" colspan="3">Aspek Keterampilan</th>
+              </tr>
+
+                  <tr>
+                  <th width=7%>NIS</th>
+                  <th width=15%>Nama</th>
+                  <th width=5%>Kelas</th>
+                  <th width=5%>Semester</th>
+                  <th width=10%>Mata Pelajaran</th>
+                  <th class="p" width=7%>Total</th>                  
+                  <th class="p" width=7%>Rata-Rata</th>
+                  <th class="p" width=7%>Huruf</th>
+                  <th class="k" width=7%>Total</th>                  
+                  <th class="k" width=7%>Rata-Rata</th>
+                  <th class="k" width=7%>Huruf</th></tr>
+              </thead>
+              <tbody>
+                <?php
+                //tampilkan seluruh data yang ada pada tabel user
+                while($data=mysqli_fetch_array($tampil)){
+                 ?>
+                 <tr>
+                 <td><?php echo $data['nis']?></td>
+                 <td><?php echo $data['nama_siswa']?></td>
+                 <td><?php echo $data['nama_kelas']?></td>
+                 <td><?php echo $data['semester'];?></td>
+                 <td><?php echo $data['nama_mp']?></td>
+                 <td><?php echo $data['total_peng']?></td>
+                 <td><?php echo $data['rata_peng']?></td>
+                 <td><?php echo $data['konversi_peng']?></td>
+                 <td><?php echo $data['total_terampil']?></td>
+                 <td><?php echo $data['rata_terampil']?></td>
+                 <td><?php echo $data['konversi_terampil']?></td>
+                 </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+            
+            <div class="box-footer">
+              <a href="?page=inputNilai" name="input" class="btn btn-info"><i class="fa fa-plus"></i>   Input Nilai</a>
+          </div>
+          </div>
+        </div>
+        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+      </div>
+</div>
+<script type="text/javascript" src="../vendor/datatables/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="../vendor/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables/buttons.html5.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables/buttons.flash.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables/pdfmake.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables/jszip.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables/vfs_fonts.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#dataSiswa').DataTable( {
+          dom: 'Bfrtip',
+          buttons: [
+          'copyHtml5',
+          'excelHtml5',
+          'csvHtml5',
+          'pdfHtml5'
+          // {
+          //     extend: 'pdfHtml5',
+          //     orientation: 'landscape',
+          //     pageSize: 'LEGAL'
+          // }
+          ]
+      } );
+  } );
+</script>
+</body>
+</html>

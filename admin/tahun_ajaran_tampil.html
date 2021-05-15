@@ -1,0 +1,66 @@
+ <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="guru.php">Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Tahun Ajaran</li>'
+        ?>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Tahun Ajaran</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Kode Tahun Ajaran</th>
+                  <th>Tahun Ajaran</th>
+                  <th>Status</th>
+                  <th>Opsi</th>
+              </thead>
+              <tbody>
+               <?php
+                include('../conn/koneksi.php');
+                $tampil = "SELECT * FROM tahun_ajaran";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel TA
+                while($data = mysqli_fetch_array($sql))
+                 {
+                 ?>
+                 <tr>
+                 <td><?php echo $data['id']?></td>
+                 <td><?php echo $data['tahun_ajaran']?></td>
+                 <?php
+                  if($data['status'] == 'Aktif'){ ?>
+                    <td style="color: green;"><?= $data['status']?></td>
+                  <?php }else{ ?>
+                    <td style="color: red;"><?= $data['status']?></td>
+                 <?php } ?>
+                 <?php
+                 if($data['status'] !== 'Aktif') { ?> 
+                    <td><center><a class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="right" title="Aktifkan" href="?page=editTA&id=<?php echo $data['id']?>"><span class="fa fa-check"></span></a></center></td></tr>
+                 <?php } } ?>
+                 <!-- <td><a class="btn btn-sm btn-success tooltips" data-placement="left" data-original-title="Non Aktifkan" href="?page=editTA&id=<?php echo $data['id']?>"><i class="fa fa-edit"></i></a></td> -->
+                 </tr></i></a>
+                
+            </table>
+            <div class="box-footer">
+                <a href="?page=addTA" name="tambah" class="btn btn-info"><i class="fa fa-plus"></i>   Tambah</a>
+              </div>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">
+          <?php $tgl=mktime(date("m"),date("d"),date("Y"));
+          echo date("d-M-Y", $tgl);
+         ?>
+        </div>
+      </div>
+</div>

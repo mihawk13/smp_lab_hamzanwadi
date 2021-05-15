@@ -1,0 +1,64 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+          Edit Mata Pelajaran
+        </h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+          <li class="active">Edit Mata Pelajaran</li>
+        </ol>
+      </section>
+      <!-- /.content -->
+      <section class="content">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+              <!-- /.box-header -->
+              <?php
+                include('../conn/koneksi.php');
+                $kode_mp = $_GET['kode_mp'];
+                $tampil = "SELECT * FROM dtmapel WHERE kode_mp = '$kode_mp'";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                {
+                ?>
+              <!-- form start -->
+              <form role="form" action="mapel_update.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+                <div class="box-body">
+                  <div class="col-xs-6 form-group">
+                    <label class="control-label">Kode Mata Pelajaran</label>
+                    <input type="text" class="form-control" name="kode_mp" value="<?php echo $data['kode_mp']; ?>" readOnly>
+                  </div>              
+                  <div class="col-xs-6 form-group">
+                    <label class="control-label">Mata Pelajaran</label>
+                    <input type="text" class="form-control" name="nama_mp"value="<?php echo $data['nama_mp']; ?>">
+                  </div>
+                  <div class="col-xs-6 form-group">
+                    <label class="control-label">KKM</label>
+                    <input type="text" class="form-control" name="kkm"value="<?php echo $data['kkm'];} ?>">
+                </div>
+              </div>
+                <!-- /.box-body -->
+  
+                <div class="box-footer">
+                  <a class="btn waves-effect waves-light">
+                  <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                  <a href="?page=viewMapel" class="btn btn-danger">Batal</a>
+                </div>
+              </form>
+            </div>
+            <!-- /.box -->
+          </div>
+        </div>
+      </section>
+    </div>
+  
+    
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  <!-- ./wrapper -->
+  

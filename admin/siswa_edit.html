@@ -1,0 +1,109 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       Edit Data Siswa
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+        <li class="active">Edit Data Pelanggan</li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit Data Siswa</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <?php
+                include('../conn/koneksi.php');
+                $nis = $_GET['nis'];
+                // $id_pengguna = $_GET['id_pengguna'];
+                $tampil = "SELECT * FROM dtsiswa WHERE nis = '$nis'";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                {
+            ?>
+            <form role="form" action="siswa_update.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">ID Pengguna</label>
+                  <input type="text" class="form-control" name="id_pengguna" readonly value="<?php echo $data['id_pengguna']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">NIS</label>
+                  <input type="text" class="form-control" name="nis" value="<?php echo $data['nis']; ?>" readOnly>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Nama Siswa</label>
+                  <input type="text" class="form-control" name="nama" value="<?php echo $data['nama_siswa']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Tanggal Lahir</label>
+                  <input type="date" placeholder="YYYY-MM-DD" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label class="control-label">Jenis Kelamin</label>
+                    <select name="jk" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="<?php echo $data['jk']; ?>"><?php echo $data['jk']; ?></option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Agama</label>
+                  <input type="text" class="form-control" name="agama" value="<?php echo $data['agama']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Alamat</label>
+                  <input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat']; ?>">
+                </div>
+                
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Status</small></label>
+                  <select name="status" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="<?php echo $data['status']; ?>"><?php echo $data['status']; ?></option>
+                      <option value="Aktif">Aktif</option>
+                      <option value="Non-aktif">Non Aktif</option>
+                    </select>
+                </div>
+                <?php } 
+                $id_pengguna = $_GET['id_pengguna'];
+                $tampil = "SELECT * FROM users WHERE id_pengguna = '$id_pengguna'";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                { ?>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Username</small></label>
+                  <input type="text" class="form-control" name="username" value="<?php echo $data['username']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label for="exampleInputPassword1"><small>Password</small></label>
+                  <input type="text" class="form-control" name="password" value="<?php echo $data['password']; } ?>">
+                </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+              <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewSiswa" class="btn btn-danger">Batal</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

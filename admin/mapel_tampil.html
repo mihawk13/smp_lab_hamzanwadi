@@ -1,0 +1,57 @@
+ <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="guru.php">Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Mata Pelajaran</li>'
+        ?>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Mata Pelajaran</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Kode Mata Pelajaran</th>
+                  <th>Mata Pelajaran</th>
+                  <th>KKM</th>
+                  <th>Opsi</th>
+              </thead>
+              <tbody>
+               <?php
+                include('../conn/koneksi.php');
+                $tampil = "SELECT * FROM dtmapel ORDER BY kode_mp ASC";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel mapel
+                while($data = mysqli_fetch_array($sql))
+                 {
+                 ?>
+                 <tr>
+                 <td><?php echo $data['kode_mp']?></td>
+                 <td><?php echo $data['nama_mp']?></td>
+                 <td><?php echo $data['kkm']?></td>
+                 <td><a href="?page=editMapel&kode_mp=<?php echo $data['kode_mp']?>"><i class="fa fa-edit"></i></a></td>
+                 </tr></i></a>
+                <?php } ?>
+            </table>
+            <div class="box-footer">
+                <a href="?page=addMapel" name="tambah" class="btn btn-info"><i class="fa fa-plus"></i>   Tambah</a>
+              </div>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">
+          <?php $tgl=mktime(date("m"),date("d"),date("Y"));
+          echo date("d-M-Y", $tgl);
+         ?>
+        </div>
+      </div>
+</div>

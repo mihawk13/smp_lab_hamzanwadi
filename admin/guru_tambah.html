@@ -1,0 +1,106 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Halaman
+        <small>Tambah Data Guru</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i><a href="index.php">Home</a></li>
+        <li class="active"><a href="#">Tambah Data Guru</a></li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="guru_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>ID Guru</small></label>
+                  <input type="text" class="form-control" name="id_guru" readonly value="<?php
+                  include "../kode_otomatis.php";
+                  Kode_Auto("G","SELECT max(id_guru) as maxKode FROM dtGuru");
+                  ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>ID Pengguna</small></label>
+                  <input type="text" class="form-control" name="id_pengguna" readonly value="<?php
+                  Kode_Auto("U","SELECT max(id_pengguna) as maxKode FROM users");
+                  ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>NIP</small></label>
+                  <input type="text" class="form-control" name="nip" placeholder="NIP Guru">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Nama</small></label>
+                  <input type="text" class="form-control" name="nama" placeholder="Nama Guru">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Alamat</small></label>
+                  <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Tanggal Lahir</small></label>
+                  <input type="date" placeholder="YYYY-MM-DD" class="form-control" name="tgl_lahir">
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label class="control-label"><small>Jenis Kelamin</small></label>
+                    <select name="jk" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="">-- Pilih Jenis Kelamin --</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Agama</small></label>
+                  <input type="text" class="form-control" name="agama" placeholder="Agama">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>No Telpon</small></label>
+                  <input type="text" class="form-control" name="telpon" placeholder="No Telpon">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Status</small></label>
+                  <select name="status" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="">-- Pilih Status --</option>
+                      <option value="Aktif">Aktif</option>
+                      <option value="Non-aktif">Non Aktif</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Username</small></label>
+                  <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label for="exampleInputPassword1"><small>Password</small></label>
+                  <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <a class="btn waves-effect waves-light">
+                <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewGuru" class="btn btn-danger">Batal</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

@@ -1,0 +1,57 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Tambah Mata Pelajaran
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+        <li class="active">Tambah Mata Pelajaran</li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="mapel_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Kode Mata Pelajaran</label>
+                  <input type="text" class="form-control" name="kode_mp" readonly value="<?php
+                        include "../kode_otomatis.php";
+                        Kode_Auto("MP","SELECT max(kode_mp) as maxKode FROM dtmapel"); ?>">
+                </div>              
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Mata Pelajaran</label>
+                  <input type="text" class="form-control" name="nama_mp" placeholder="Mata Pelajaran">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">KKM</label>
+                  <input type="text" class="form-control" name="kkm" placeholder="KKM">
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <a class="btn waves-effect waves-light">
+                <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewMapel" class="btn btn-danger">Batal</a>
+               </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

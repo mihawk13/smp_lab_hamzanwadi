@@ -1,0 +1,53 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Tambah Tahun Ajaran
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+        <li class="active">Tambah Tahun Ajaran</li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="tahun_ajaran_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Kode Tahun Ajaran</label>
+                  <input type="text" class="form-control" name="kode_ta" readonly value="<?php
+                  include "../kode_otomatis.php";
+                  Kode_Auto("TA","SELECT max(id) as maxKode FROM tahun_ajaran"); ?>">
+                </div>              
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Tahun Ajaran</label>
+                  <input maxlength="4" type="text" class="form-control" name="tahun_ajaran" placeholder="4 Digit Tahun Ajaran (2015)">
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <a class="btn waves-effect waves-light">
+                <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewTA" class="btn btn-danger">Batal</a>
+               </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

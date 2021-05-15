@@ -1,0 +1,32 @@
+<div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.php">Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Data Nilai Siswa</li>'
+        ?>
+      </ol>
+        <div class="col-xs-6 form-group">
+          <label ><small>Kelas</small></label>
+            <select id="kelas" name="nama_kelas" class="form-control" required />
+            <option> ---- Pilih Kelas ---- </option>
+            <?php
+            $query = "SELECT * FROM kelas";
+            $tampil=mysqli_query($koneksi,$query);
+            if (!$tampil) {
+              printf("Error: %s\n", mysqli_error($koneksi));
+              exit();
+            }
+            while($data=mysqli_fetch_array($tampil)){ ?>
+              <option value="<?= $data['nama_kelas']; ?>"><?= $data['nama_kelas']; } ?></option>
+            </select>
+          </div>
+          <div class="box-footer">
+                  <!-- <a href="?page=nilai&nama_kelas=$kelas['nama_kelas']; ?>" name="input" class="btn btn-info"><i class="fa fa-plus"></i>Tampilkan</a> -->
+                  <a type="submit" onclick="openNilai()" class="btn btn-info" style="margin-top: 15px;"><i class="fa fa-plus"></i>Tampilkan</a>
+          </div>
+</div>

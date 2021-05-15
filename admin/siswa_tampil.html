@@ -1,0 +1,67 @@
+ <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.php">Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Siswa</li>'
+        ?>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Siswa</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>NIS</th>
+                  <th>Nama Siswa</th>
+                  <th>Tanggal lahir</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Alamat</th>
+                  <th>Opsi</th>
+              </thead>
+              <tbody>
+                <?php
+
+                $tampil = "SELECT * FROM dtsiswa";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel user
+                while($data = mysqli_fetch_array($sql))
+                 {
+                 ?>
+                 <tr>
+                 <td><?php echo $data['nis']?></td>
+                 <td><?php echo $data['nama_siswa']?></td>
+                 <td><?php echo $data['tgl_lahir']?></td>
+                 <td><?php echo $data['jk']?></td>
+                 <td><?php echo $data['alamat']?></td>
+                 <td>
+                  <a href="?page=detailSiswa&nis=<?php echo $data['nis']; ?>" data-toggle="tooltip" data-placement="top" title="Detail Data Siswa">
+                    <i class="fa fa-info"></i></a>
+                    <span> | </span>
+                  <a href="?page=editSiswa&nis=<?php echo $data['nis']?>&id_pengguna=<?php echo $data['id_pengguna']?>" data-toggle="tooltip" data-placement="bottom" title="Edit Data Siswa">
+                    <i class="fa fa-edit"></i></a>
+                 </td>
+                 <!-- <td></td> -->
+                 </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+            <div class="box-footer">
+                <a href="?page=addSiswa" name="tambah" class="btn btn-info"><i class="fa fa-plus"></i>   Tambah Siswa</a>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+      </div>
+</div>

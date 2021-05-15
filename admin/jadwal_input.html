@@ -1,0 +1,99 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+            <h1>
+              Tambah Jadwal
+            </h1>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-dashboard"></i><a href="index.php">Home</a></li>
+              <li class="active"><a href="#">Tambah Jadwal</a></li>
+            </ol>
+          </section>
+          <!-- /.content -->
+          <section class="content">
+            <div class="row">
+              <!-- left column -->
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                  <!-- /.box-header -->
+                  <!-- form start -->
+                  <form role="form" action="jadwal_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+                    <div class="box-body">
+                      <!-- <div class="col-xs-6 form-group">
+                        <label class="control-label">ID Jadwal</label> -->
+                        <input type="hidden" class="form-control" name="id_jadwal" readonly value="<?php
+                        include "../kode_otomatis.php";
+                        Kode_Auto("JW","SELECT max(id_jadwal) as maxKode FROM dtjadwal"); ?>">
+                      <!-- </div>               -->
+                      <div class="col-xs-6 form-group">
+                        <label class="control-label">Mata Pelajaran</label>
+                          <select name="kode_mp" class="form-control selectpicker show-tick" data-live-search="true">
+                            <option> ---- Pilih Mata Pelajaran ---- </option>
+                            <?php
+                              include "../conn/Koneksi.php";
+                              $eskiel = mysqli_query($koneksi,"SELECT * FROM dtmapel");
+                              if(mysqli_num_rows($eskiel) != 0){
+                              while($dataku = mysqli_fetch_assoc($eskiel)){
+                              echo '<option value='.$dataku['kode_mp'].'>'.$dataku['nama_mp'].'</option>';}}
+                              ?>
+                          </select>
+                      </div>
+                      <div class="col-xs-6 form-group">
+                        <label class="control-label">Nama Guru</label>
+                          <select name="id_guru" class="form-control selectpicker show-tick" data-live-search="true">
+                            <option> ---- Pilih Guru ---- </option>
+                            <?php
+                              $eskiel = mysqli_query($koneksi,"SELECT * FROM dtguru");
+                              if(mysqli_num_rows($eskiel) != 0){
+                              while($dataku = mysqli_fetch_assoc($eskiel)){
+                              echo '<option value='.$dataku['id_guru'].'>'.$dataku['nama_guru'].'</option>';}}
+                              ?>
+                          </select>
+                      </div>
+                      <div class="col-xs-6 form-group">
+                        <label class="control-label">Kelas</label>
+                          <select name="kode_kelas" class="form-control selectpicker show-tick" data-live-search="true">
+                            <option> ---- Pilih Kelas ---- </option>
+                            <?php
+                              $eskiel = mysqli_query($koneksi,"SELECT * FROM kelas");
+                              if(mysqli_num_rows($eskiel) != 0){
+                              while($dataku = mysqli_fetch_assoc($eskiel)){
+                              echo '<option value='.$dataku['kode_kelas'].'>'.$dataku['nama_kelas'].'</option>';}}
+                              ?>
+                          </select>
+                      </div>
+                      <div class="col-xs-6 form-group">
+                        <label class="control-label">Tahun Ajaran</label>
+                          <select name="id_thn" class="form-control selectpicker show-tick" data-live-search="true">
+                            <option> ---- Pilih Tahun Ajaran ---- </option>
+                            <?php
+                              $eskiel = mysqli_query($koneksi,"SELECT * FROM tahun_ajaran WHERE status='Aktif'");
+                              if(mysqli_num_rows($eskiel) != 0){
+                              while($dataku = mysqli_fetch_assoc($eskiel)){
+                              echo '<option value='.$dataku['id'].'>'.$dataku['tahun_ajaran'].'</option>';}}
+                              ?>
+                          </select>
+                      </div>
+                    <!-- /.box-body -->
+      
+                    <div class="box-footer">
+                      <a class="btn waves-effect waves-light">
+                      <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                      <a href="?page=viewJadwal" class="btn btn-danger">Batal</a>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.box -->
+              </div>
+            </div>
+          </section>
+        </div>
+      
+        
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+      <!-- ./wrapper -->
+      

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+        <!-- Content Header (Page header) -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.php">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Kelas Siswa</li>
+          </ol>
+          <!-- Example DataTables Card-->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-table"></i> Kelas Siswa</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <th>Nama Kelas</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Nama Siswa</th>
+                    </thead>
+                  <tbody>
+                      <?php
+                    include('../conn/koneksi.php');
+                    $tampil = "SELECT kl.`nama_kelas`,ks.`thn_ajaran`,sw.`nama_siswa` FROM kelas_siswa AS ks
+                    INNER JOIN dtsiswa AS sw ON ks.`nis` = sw.`nis`
+                    INNER JOIN kelas AS kl ON ks.`kode_kelas` = kl.`kode_kelas`";
+                    //perintah menampilkan data dikerjakan
+                    $sql = mysqli_query($koneksi,$tampil);
+    
+                    //tampilkan seluruh data yang ada pada tabel user
+                    while($data = mysqli_fetch_array($sql))
+                     {
+                     ?>
+                     <tr>
+                     <td><?php echo $data['nama_kelas']?></td>
+                     <td><?php echo $data['thn_ajaran']?></td>
+                     <td><?php echo $data['nama_siswa']?></td>
+                     </tr></i></a>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                  <div class="box-footer">
+                    <a href="?page=addKelasSiswa" name="tambah" class="btn btn-info"><i class="fa fa-plus"></i>         Tambah Kelas Siswa</a>
+                  </div>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">
+            	<?php $tgl=mktime(date("m"),date("d"),date("Y"));
+	          echo date("d-M-Y", $tgl);
+	         ?>
+            </div>
+          </div>
+    </div>

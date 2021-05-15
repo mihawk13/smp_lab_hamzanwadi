@@ -1,0 +1,62 @@
+ <div class="container-fluid">
+    <!-- Content Header (Page header) -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.php">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Guru</li>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Guru</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            	<thead>
+            		<th>NIP</th>
+            		<th>Nama Guru</th>
+            		<th>Alamat</th>
+            		<th>Tgl Lahir</th>
+            		<th>Jenis Kelamin</th>
+            		<th>Agama</th>
+            		<th>No Telpon</th>
+            		<th>Status</th>
+            		<th>Opsi</th>
+            	</thead>
+              <tbody>
+              	<?php
+                include('../conn/koneksi.php');
+                $tampil = "SELECT * FROM dtguru ORDER BY nama_guru ASC";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel user
+                while($data = mysqli_fetch_array($sql))
+                 {
+                 ?>
+                 <tr>
+                 <td><?php echo $data['nip']?></td>
+                 <td><?php echo $data['nama_guru']?></td>
+                 <td><?php echo $data['alamat']?></td>
+                 <td><?php echo $data['tgl_lahir']?></td>
+                 <td><?php echo $data['jk']?></td>
+                 <td><?php echo $data['agama']?></td>
+                 <td><?php echo $data['no_telpon']?></td>
+                 <td style="color: green;"><?php echo $data['status']?></td>
+                 <td><a href="?page=editGuru&id_guru=<?php echo $data['id_guru']?>&id_pengguna=<?php echo $data['id_pengguna']?>"><i class="fa fa-edit"></i></a></td>
+                 </tr></i></a>
+                <?php } ?>
+              </tbody>
+            </table>
+              <div class="box-footer">
+                <a href="?page=addGuru" name="tambah" class="btn btn-info"><i class="fa fa-plus"></i>   Tambah Guru</a>
+              </div>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">
+          <?php $tgl=mktime(date("m"),date("d"),date("Y"));
+          echo date("d-M-Y", $tgl);
+         ?></div>
+      </div>
+</div>

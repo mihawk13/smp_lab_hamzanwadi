@@ -1,0 +1,68 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+          Edit Tahun Ajaran
+        </h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-dashboard"></i>&nbsp;<a href="index.php">Home</a></li>
+          <li class="active">Edit tahun ajaran</li>
+        </ol>
+      </section>
+      <!-- /.content -->
+      <section class="content">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+              <!-- /.box-header -->
+              <?php
+                include('../conn/koneksi.php');
+                $id = $_GET['id'];
+                $tampil = "SELECT * FROM tahun_ajaran WHERE id = '$id'";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                {
+                ?>
+              <!-- form start -->
+              <form role="form" action="tahun_ajaran_update.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+                <div class="box-body">
+                  <div class="col-xs-6 form-group">
+                    <label class="control-label">Kode Tahun Ajaran</label>
+                    <input type="text" class="form-control" name="kode_ta" value="<?php echo $data['id']; ?>" readOnly>
+                  </div>              
+                  <div class="col-xs-6 form-group">
+                    <label class="control-label">Tahun Ajaran</label>
+                    <input type="text" class="form-control" name="tahun_ajaran"value="<?php echo $data['tahun_ajaran']; ?>">
+                  </div>
+                  <div class="col-xs-6 form-group">
+                    <label class="control-label">Status</label>
+                    <select name="status" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value=""><?php echo $data['status']; } ?></option>
+                      <option value="Aktif">Aktif</option>
+                      <option value="Non-aktif">Non-Aktif</option>
+                    </select>
+                </div>
+              </div>
+                <!-- /.box-body -->
+  
+                <div class="box-footer">
+                  <a class="btn waves-effect waves-light">
+                  <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                  <a href="?page=viewTA" class="btn btn-danger">Batal</a>
+                </div>
+              </form>
+            </div>
+            <!-- /.box -->
+          </div>
+        </div>
+      </section>
+    </div>
+  
+    
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  <!-- ./wrapper -->
+  

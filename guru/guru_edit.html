@@ -1,0 +1,97 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       Edit Data Guru
+      </h1>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="guru_update.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <?php
+
+                $tampil = "SELECT * FROM dtguru 
+                INNER JOIN users ON dtguru.`id_pengguna` = users.`id_pengguna`
+                WHERE dtguru.id_pengguna = '$_SESSION[akun_id]'";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel user
+                if($data = mysqli_fetch_array($sql))
+                 { ?>
+                  <input type="hidden" name="id_guru" value="<?php echo $data['id_guru']?>" readonly>
+                  <input type="hidden" name="id_pengguna" value="<?php echo $data['id_pengguna']?>" readonly>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>NIP</small></label>
+                  <input type="text" class="form-control" name="nip" value="<?php echo $data['nip']?>" placeholder="NIP Guru">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Nama</small></label>
+                  <input type="text" class="form-control" name="nama" value="<?php echo $data['nama_guru']?>" placeholder="Nama Guru">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Alamat</small></label>
+                  <input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat']?>" placeholder="Alamat">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Tanggal Lahir</small></label>
+                  <input type="date" class="form-control" value="<?php echo $data['tgl_lahir']?>" name="tgl_lahir">
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label class="control-label"><small>Jenis Kelamin</small></label>
+                    <select name="jk" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="<?php echo $data['jk']?>" ><?php echo $data['jk']?></option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Agama</small></label>
+                  <input type="text" class="form-control" name="agama" value="<?php echo $data['agama']?>" placeholder="Agama">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>No Telpon</small></label>
+                  <input type="text" class="form-control" name="telpon" value="<?php echo $data['no_telpon']?>" placeholder="No Telpon">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Status</small></label>
+                  <input readonly type="text" class="form-control" name="status" value="<?php echo $data['status']?>" placeholder="Status">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Username</small></label>
+                  <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $data['username']?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label for="exampleInputPassword1"><small>Password</small></label>
+                  <input type="text" class="form-control" name="password" placeholder="Password" value="<?php echo $data['password']?>">
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <?php } ?>
+              <div class="box-footer">
+                <a class="btn waves-effect waves-light">
+                <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewData" class="btn btn-danger">Batal</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

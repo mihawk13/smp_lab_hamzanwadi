@@ -1,0 +1,93 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+            <h1>
+              Tambah Kelas Siswa
+            </h1>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-dashboard"></i>&nbsp;<a href="index.php">Home</a></li>
+              <li class="active"><a href="#">Tambah Kelas Siswa</a></li>
+            </ol>
+          </section>
+          <!-- /.content -->
+          <section class="content">
+            <div class="row">
+              <!-- left column -->
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                  <!-- /.box-header -->
+                  <!-- form start -->
+                  <form role="form" action="kelas_siswa_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+                    <div class="box-body">
+                      <div class="col-xs-6 form-group">
+                        <label class="control-label">Kode Kelas Siswa</label>
+                        <input type="text" class="form-control" name="kode_kelas_siswa" readonly value="<?php
+                        include "../kode_otomatis.php";
+                        Kode_Auto("KS","SELECT max(kode_kelas_siswa) as maxKode FROM kelas_siswa"); ?>">
+                      </div>              
+                      <div class="col-xs-6 form-group">
+                        <label class="control-label">Kelas</label>
+                        <select name="kode_kelas" class="form-control selectpicker show-tick" data-live-search="true">
+                                <option> ---- Pilih Kelas ---- </option>
+                                <?php
+                                include "../conn/Koneksi.php";
+                                $eskiel = mysqli_query($koneksi,"SELECT * FROM kelas");
+                                if(mysqli_num_rows($eskiel) != 0){
+                                while($dataku = mysqli_fetch_assoc($eskiel)){
+                                echo '<option value='.$dataku['kode_kelas'].'>'.$dataku['nama_kelas'].'</option>';}}
+                                ?>
+                        </select>
+                      </div>
+                      <div class="col-xs-6 form-group">
+                            <label class="control-label">Nama Siswa</label>
+                            <select name="nis" class="form-control selectpicker show-tick" data-live-search="true">
+                                    <option> ---- Pilih Siswa ---- </option>
+                                    <?php
+                                    include "../conn/Koneksi.php";
+                                    $eskiel = mysqli_query($koneksi,"SELECT * FROM dtSiswa WHERE nis NOT IN (SELECT nis FROM kelas_siswa)");
+                                    if(mysqli_num_rows($eskiel) != 0){
+                                    while($dataku = mysqli_fetch_assoc($eskiel)){
+                                    echo '<option value='.$dataku['nis'].'>'.$dataku['nama_siswa'].'</option>';}}
+                                    ?>
+                            </select>
+                     </div>
+                     <div class="col-xs-6 form-group">
+                            <label class="control-label">Tahun Ajaran</label>
+                            <select name="thn_ajaran" class="form-control selectpicker show-tick" data-live-search="true">
+                                    <option> ---- Pilih Tahun Ajaran ---- </option>
+                                    <?php
+                                    include "../conn/Koneksi.php";
+                                    $eskiel = mysqli_query($koneksi,"SELECT * FROM tahun_ajaran WHERE status = 'Aktif'");
+                                    if(mysqli_num_rows($eskiel) != 0){
+                                    while($dataku = mysqli_fetch_assoc($eskiel)){
+                                    echo '<option value='.$dataku['tahun_ajaran'].'>'.$dataku['tahun_ajaran'].'</option>';}}
+                                    ?>
+                            </select>
+                     </div>
+                     
+                    <!-- /.box-body -->
+                    <div class="col-xs-6 form-group">
+                        <input type="submit" name="simpan" class="btn btn-success" value="Simpan" />
+                        <a href="?page=viewKelasSiswa" class="btn btn-danger ">Batal</a>
+                    </div>
+                    <!-- <div class="box-footer">
+                      <a class="btn waves-effect waves-light">
+                      <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                      <a href="?page=viewkelas" class="btn btn-danger">Batal</a>
+                    </div> -->
+                  </form>
+                </div>
+                <!-- /.box -->
+              </div>
+            </div>
+          </section>
+        </div>
+      
+        
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+      <!-- ./wrapper -->
+      

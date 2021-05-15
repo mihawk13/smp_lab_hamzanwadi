@@ -1,0 +1,115 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+      Edit Data Guru
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+        <li class="active"><a href="#">Edit Data Guru</a></li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            <?php
+                include('../conn/koneksi.php');
+                $id_guru = $_GET['id_guru'];
+                // $id_pengguna = $_GET['id_pengguna'];
+                $tampil = "SELECT * FROM dtguru WHERE id_guru = '$id_guru'";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                {
+            ?>
+            <form role="form" action="guru_update.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>ID Guru</small></label>
+                  <input type="text" class="form-control" name="id_guru" readonly value="<?php echo $data['id_guru']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>ID Pengguna</small></label>
+                  <input type="text" class="form-control" name="id_pengguna" readonly value="<?php echo $data['id_pengguna']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>NIP</small></label>
+                  <input type="text" class="form-control" name="nip" value="<?php echo $data['nip']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Nama</small></label>
+                  <input type="text" class="form-control" name="nama" value="<?php echo $data['nama_guru']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Alamat</small></label>
+                  <input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Tanggal Lahir</small></label>
+                  <input type="date" placeholder="YYYY-MM-DD" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label class="control-label"><small>Jenis Kelamin</small></label>
+                    <select name="jk" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="<?php echo $data['jk']; ?>"><?php echo $data['jk']; ?></option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Agama</small></label>
+                  <input type="text" class="form-control" name="agama" value="<?php echo $data['agama']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>No Telpon</small></label>
+                  <input type="text" class="form-control" name="telpon" value="<?php echo $data['no_telpon']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Status</small></label>
+                  <select name="status" class="form-control selectpicker show-tick" data-live-search="true">
+                      <option value="<?php echo $data['status']; ?>"><?php echo $data['status']; ?></option>
+                      <option value="Aktif">Aktif</option>
+                      <option value="Non-aktif">Non Aktif</option>
+                    </select>
+                </div>
+                <?php } 
+                $id_pengguna = $_GET['id_pengguna'];
+                $tampil = "SELECT * FROM users WHERE id_pengguna = '$id_pengguna'";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                { ?>
+                <div class="col-xs-6 form-group">
+                  <label class="control-label"><small>Username</small></label>
+                  <input type="text" class="form-control" name="username" value="<?php echo $data['username']; ?>">
+                </div>
+                <div class="col-xs-6 form-group">
+                  <label for="exampleInputPassword1"><small>Password</small></label>
+                  <input type="text" class="form-control" name="password" value="<?php echo $data['password']; } ?>">
+                </div>
+              </div>
+              
+
+              <div class="box-footer">
+                <a class="btn waves-effect waves-light">
+                <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewGuru" class="btn btn-danger">Batal</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

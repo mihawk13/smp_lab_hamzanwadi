@@ -1,0 +1,60 @@
+<div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="guru.php">Dashboard</a>
+          </li>
+          <?php 
+           include"../conn/koneksi.php";
+          
+          echo'<li class="breadcrumb-item active">Jadwal Pelajaran</li>'
+          ?>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-table"></i> Jadwal Pelajaran</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                    <th>ID Jadwal</th>
+                    <th>Kelas</th>
+                    <th>Nama Guru</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Tahun Ajaran</th>
+                </thead>
+                <tbody>
+                  <?php
+                  $tampil = "SELECT jd.`id_jadwal`,kl.`nama_kelas`,mp.`nama_mp`,gr.`nama_guru`,th.`tahun_ajaran` FROM dtjadwal AS jd
+                  INNER JOIN dtmapel AS mp ON jd.`kode_mp` = mp.`kode_mp`
+                  INNER JOIN dtguru AS gr ON jd.`id_guru` = gr.`id_guru`
+                  INNER JOIN kelas AS kl ON jd.`kode_kelas` = kl.`kode_kelas`
+                  INNER JOIN tahun_ajaran AS th ON jd.`id_thn_ajaran` = th.`id`";
+                  
+                  $sql = mysqli_query($koneksi,$tampil);
+  
+                  while($data = mysqli_fetch_array($sql))
+                   {
+                   ?>
+                   <tr>
+                   <td><?php echo $data['id_jadwal']?></td>
+                   <td><?php echo $data['nama_kelas']?></td>
+                   <td><?php echo $data['nama_guru']?></td>
+                   <td><?php echo $data['nama_mp']?></td>
+                   <td><?php echo $data['tahun_ajaran']?></td>
+                   </tr>
+                  <?php
+                  }
+                  ?>
+                </tbody>
+              </table>
+              <div class="box-footer">
+                <a href="?page=inputJadwal" name="input" class="btn btn-info"><i class="fa fa-plus"></i>   Input Jadwal</a>
+            </div>
+            </div>
+          </div>
+          <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+        </div>
+  </div>

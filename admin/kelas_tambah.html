@@ -1,0 +1,53 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Tambah Data Kelas
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard">&nbsp;</i><a href="index.php">Home</a></li>
+        <li class="active"><a href="#">Tambah Data Kelas</a></li>
+      </ol>
+    </section>
+    <!-- /.content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="kelas_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+              <div class="box-body">
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Kode Kelas</label>
+                  <input type="text" class="form-control" name="kode_kelas" readonly value="<?php
+                  include "../kode_otomatis.php";
+                  Kode_Auto("K","SELECT max(kode_kelas) as maxKode FROM kelas"); ?>">
+                </div>              
+                <div class="col-xs-6 form-group">
+                  <label class="control-label">Nama Kelas</label>
+                  <input type="text" class="form-control" name="nama" placeholder="Nama Kelas">
+                </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <a class="btn waves-effect waves-light">
+                <input type="submit" name="simpan" class="btn btn-success" value="Simpan" /></a>
+                <a href="?page=viewKelas" class="btn btn-danger">Batal</a>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+<!-- ./wrapper -->

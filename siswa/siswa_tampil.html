@@ -1,0 +1,47 @@
+ <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.php">Dashboard</a>
+        </li>
+        <?php 
+         include"../conn/koneksi.php";
+        
+        echo'<li class="breadcrumb-item active">Tentang saya</li>'
+        ?>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Saya</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+              <tbody>
+                <?php
+
+                $tampil = "SELECT * FROM dtsiswa 
+                INNER JOIN users ON dtsiswa.`id_pengguna` = users.`id_pengguna`
+                WHERE dtsiswa.id_pengguna = '$_SESSION[akun_id]'";
+                //perintah menampilkan data dikerjakan
+                $sql = mysqli_query($koneksi,$tampil);
+
+                //tampilkan seluruh data yang ada pada tabel user
+                if($data = mysqli_fetch_array($sql))
+                 {
+                 ?>
+                 <tr><th width="25%">NIS</th><td><?php echo "$data[nis]"?></td></tr>
+                 <tr><th width="25%">Nama</th><td><?php echo $data['nama_siswa']?></td></tr>
+                 <tr><th width="25%">Alamat</th><td><?php echo $data['alamat']?></td></tr>
+                 <tr><th width="25%">Jenis Kelamin</th><td><?php echo $data['jk']?></td></tr>
+                 <tr><th width="25%">Tanggal Lahir</th><td><?php echo $data['tgl_lahir']?></td></tr>
+                 <tr><th width="25%">Status</th><td style="color: green;"><?php echo $data['status']?></td>
+                 </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+</div>

@@ -1,0 +1,54 @@
+ <?php
+ include"../conn/koneksi.php";
+$kode = @$_GET['nis'];
+$query=mysqli_query($koneksi,"SELECT * FROM dtsiswa WHERE nis ='$kode' ");
+?>
+ <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="guru.php">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Detail Siswa</li>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Siswa</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">     
+              <tbody>
+                <?php
+                //tampilkan seluruh data yang ada pada tabel user
+                while($data = mysqli_fetch_array($query))
+                 {
+                 ?>
+                 <tr>
+                 <th width="30%">NIS</th><td><?php echo "$data[nis]"?></td></tr>
+                 <tr><th width="30%">Nama Siswa</th><td><?php echo "$data[nama_siswa]"?></td></tr>
+                 <!-- <tr><th width="30%">Kelas</th><td><?php echo "$data[nama_kelas]"?></td></tr> -->
+                 <tr><th width="30%">Tempat tanggal lahir</th><td><?php echo "$data[tgl_lahir]"?></td></tr>
+                 <tr><th width="30%">Jenis Kelamin</th><td><?php echo "$data[jk]"?></td></tr>
+                 <tr><th width="30%">Agama</th><td><?php echo "$data[agama]"?></td></tr>
+                 <tr><th width="30%">Alamat</th><td><?php echo "$data[alamat]"?></td></tr>
+                 <!-- <tr><th width="30%">Nama Ayah</th><td><?php echo "$data[nmayah]"?></td></tr>
+                 <tr><th width="30%">Nama Ibu</th><td><?php echo "$data[nmibu]"?></td></tr>
+                 <tr><th width="30%">Pekerjaan Ayah</th><td><?php echo "$data[kerja_a]"?></td></tr>
+                 <tr><th width="30%">Pekerjaan Ibu</th><td><?php echo "$data[kerja_i]"?></td></tr>
+                 <tr><th width="30%">Alamat Orang Tua</th><td><?php echo "$data[aot_jalan]"?></td></tr>
+                 <tr><th width="30%">Desa</th><td><?php echo "$data[aot_desa]"?></td></tr>
+                 <tr><th width="30%">Kecamatan</th><td><?php echo "$data[aot_kec]"?></td></tr>
+                 <tr><th width="30%">Kabupaten</th><td><?php echo "$data[aot_kab]"?></td></tr>
+                 <tr><th width="30%">Provinsi</th><td><?php echo "$data[aot_prov]"?></td> -->
+                 </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+      </div>
+</div>
