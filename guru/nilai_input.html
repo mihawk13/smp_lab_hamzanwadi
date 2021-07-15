@@ -6,7 +6,18 @@ h3.judul {
     text-align: center;
     text-decoration: underline;
     text-decoration-color: black;
-} 
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>
   <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
   <!-- <script src="main.js"></script> -->
@@ -84,36 +95,36 @@ h3.judul {
               <h4 class="mb"><i class="fa fa-angle-right"></i> Ulangan Harian</h4>
                 <div class="col-xs-3 form-group">
                   <label><small>Ulangan 1</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uh1" name="uh1" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uh1" name="uh1" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-3 form-group">
                   <label><small>Ulangan 2</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uh2" name="uh2" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uh2" name="uh2" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-3 form-group">
                   <label><small>Ulangan 3</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uh3" name="uh3" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uh3" name="uh3" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-3 form-group">
                   <label><small>Ulangan 4</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uh4" name="uh4" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uh4" name="uh4" placeholder="Nilai (0-100)">
                 </div>
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Tugas / PR</h4>
                 <div class="col-xs-3 form-group">
                   <label><small>Tugas 1</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="pr1" name="pr1" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="pr1" name="pr1" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-3 form-group">
                   <label><small>Tugas 2</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="pr2" name="pr2" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="pr2" name="pr2" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-3 form-group">
                   <label><small>Tugas 3</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="pr3" name="pr3" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="pr3" name="pr3" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-3 form-group">
                   <label><small>Tugas 4</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="pr4" name="pr4" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="pr4" name="pr4" placeholder="Nilai (0-100)">
                 </div>
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Ujian</h4>
                 <div class="col-xs-4 form-group">
@@ -122,11 +133,11 @@ h3.judul {
                 </div>
                 <div class="col-xs-4 form-group">
                   <label><small>Nilai UTS</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uts" name="uts" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uts" name="uts" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-4 form-group">
                   <label><small>Nilai UAS</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uas" name="uas" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uas" name="uas" placeholder="Nilai (0-100)">
                 </div>
 
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Nilai</h4>
@@ -152,19 +163,19 @@ h3.judul {
               <h4 class="mb"><i class="fa fa-angle-right"></i> Unjuk Kerja</h4>
                 <div class="col-xs-2 form-group">
                   <label ><small>Kerja 1</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="uk1" name="uk1" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="uk1" name="uk1" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Kerja 2</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="uk2" name="uk2" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="uk2" name="uk2" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Kerja 3</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="uk3" name="uk3" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="uk3" name="uk3" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Kerja 4</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="uk4" name="uk4" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="uk4" name="uk4" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-4 form-group">
                   <label><small>Rata-Rata Unjuk Kerja</small></label>
@@ -173,19 +184,19 @@ h3.judul {
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Projek</h4>
                 <div class="col-xs-2 form-group">
                   <label ><small>Projek 1</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="projek1" name="projek1" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="projek1" name="projek1" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Projek 2</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="projek2" name="projek2" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="projek2" name="projek2" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Projek 3</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="projek3" name="projek3" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="projek3" name="projek3" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Projek 4</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="projek4" name="projek4" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="projek4" name="projek4" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-4 form-group">
                   <label><small>Rata-Rata Projek</small></label>
@@ -194,19 +205,19 @@ h3.judul {
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Portofolio</h4>
                 <div class="col-xs-2 form-group">
                   <label ><small>Portofolio 1</small></label>
-                  <input maxLength="3" type="text" class="form-control " id="port1" name="port1" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control " id="port1" name="port1" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Portofolio 2</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="port2" name="port2" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="port2" name="port2" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Portofolio 3</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="port3" name="port3" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="port3" name="port3" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-2 form-group">
                   <label ><small>Portofolio 4</small></label>
-                  <input maxLength="3" type="text" class="form-control" id="port4" name="port4" placeholder="Nilai (0-100)">
+                  <input type="number" max="100" class="form-control" id="port4" name="port4" placeholder="Nilai (0-100)">
                 </div>
                 <div class="col-xs-4 form-group">
                   <label><small>Rata-Rata Portofolio</small></label>

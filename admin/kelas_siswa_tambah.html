@@ -45,7 +45,7 @@
                                     <option> ---- Pilih Siswa ---- </option>
                                     <?php
                                     include "../conn/Koneksi.php";
-                                    $eskiel = mysqli_query($koneksi,"SELECT * FROM dtSiswa WHERE nis NOT IN (SELECT nis FROM kelas_siswa)");
+                                    $eskiel = mysqli_query($koneksi,"SELECT * FROM dtSiswa WHERE nis NOT IN (SELECT nis FROM kelas_siswa WHERE thn_ajaran='$_SESSION[tahun_ajaran]') ORDER BY nama_siswa");
                                     if(mysqli_num_rows($eskiel) != 0){
                                     while($dataku = mysqli_fetch_assoc($eskiel)){
                                     echo '<option value='.$dataku['nis'].'>'.$dataku['nama_siswa'].'</option>';}}

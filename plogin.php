@@ -23,9 +23,11 @@ if (mysqli_num_rows($query) == 0) {
   $row = mysqli_fetch_assoc($query);
   $_SESSION['username'] = $row['username'];
   $_SESSION['akun_id'] = $row['id_pengguna'];
-  // $_SESSION['akun_nip'] = $row['nip'];
   // $_SESSION['akun_nama'] = $row['nama'];
   // $_SESSION['akun_alamat'] = $row['alamat'];
+  $querys = mysqli_query($koneksi, "SELECT tahun_ajaran FROM tahun_ajaran WHERE status='Aktif'") or die();
+  $rows = mysqli_fetch_assoc($querys);
+  $_SESSION['tahun_ajaran'] = $rows['tahun_ajaran'];
 
   if ($row['level'] == "admin") {
     $_SESSION['level'] = 'admin';
