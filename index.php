@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['level'] !=  "admin"){
+if (empty($_SESSION['level'])) {
 header("Location: login.php");
 }
 ?>

@@ -7,89 +7,11 @@
     <li class="active">Dashboard</li>
   </ol>
 </section>
-<!-- Main content -->
-<div class="col-lg-3 col-xs-6">
-  <!-- small box -->
-  <div class="small-box bg-aqua">
-    <div class="inner">
-      <?php
-      include "../conn/koneksi.php";
-      $sql = "SELECT * FROM dtsiswa";
-      $query = mysqli_query($koneksi, $sql);
-      $count = mysqli_num_rows($query);
-      ?>
-      <h3><?php echo "$count"; ?></h3>
 
-      <p>Jumlah Siswa</p>
-    </div>
-    <div class="icon">
-      <i class="fa fa-user"></i>
-    </div>
-    <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
-  </div>
-</div>
-<!-- ./col -->
-<div class="col-lg-3 col-xs-6">
-  <!-- small box -->
-  <div class="small-box bg-green">
-    <div class="inner">
-      <?php
-      $sql = "SELECT * FROM dtguru";
-      $query = mysqli_query($koneksi, $sql);
-      $count = mysqli_num_rows($query);
-      ?>
-      <h3><?php echo "$count"; ?></h3>
-
-      <p>Jumlah Guru</p>
-    </div>
-    <div class="icon">
-      <i class="fa fa-users"></i>
-    </div>
-  </div>
-</div>
-<!-- ./col -->
-<div class="col-lg-3 col-xs-6">
-  <!-- small box -->
-  <div class="small-box bg-yellow">
-    <div class="inner">
-      <?php
-      $sql = "SELECT * FROM dtmapel";
-      $query = mysqli_query($koneksi, $sql);
-      $count = mysqli_num_rows($query);
-      ?>
-      <h3><?php echo "$count"; ?></h3>
-
-      <p>Mata Pelajaran</p>
-    </div>
-    <div class="icon">
-      <i class="fa fa-book"></i>
-    </div>
-  </div>
-</div>
-<!-- ./col -->
-<div class="col-lg-3 col-xs-6">
-  <!-- small box -->
-  <div class="small-box bg-red">
-    <div class="inner">
-      <?php
-      include "../conn/koneksi.php";
-      $sql = "SELECT * FROM kelas";
-      $query = mysqli_query($koneksi, $sql);
-      $count = mysqli_num_rows($query);
-      ?>
-      <h3><?php echo "$count"; ?></h3>
-
-      <p>Jumlah Kelas</p>
-    </div>
-    <div class="icon">
-      <i class="fa fa-home"></i>
-    </div>
-  </div>
-</div>
 
 <div class="container-fluid">
   <!-- Example DataTables Card-->
-  <div class="card mb-3">
+  <div class="card mb-3" style="margin-top: 20px;">
     <div class="card-header">
       <i class="fa fa-table"></i> Data Saya
     </div>
@@ -152,17 +74,18 @@
           <thead>
             <tr>
               <th >Kelas</th>
+              <th >Jumlah Siswa</th>
               <th >Mata Pelajaran</th>
             </tr>
           </thead>
           <tbody>
             <?php
-            $query = "SELECT c.nama_kelas,b.nama_mp FROM dtjadwal a
+            $query = "SELECT c.nama_kelas,b.nama_mp,c.kode_kelas FROM dtjadwal a
             INNER JOIN dtmapel b ON a.kode_mp=b.kode_mp
             INNER JOIN kelas c ON a.kode_kelas=c.kode_kelas
             INNER JOIN tahun_ajaran d ON a.id_thn_ajaran=d.id
             INNER JOIN dtguru e ON a.id_guru=e.id_guru
-            WHERE d.status= 'Aktif' AND e.id_pengguna= 'U001'";
+            WHERE d.status= 'Aktif' AND e.id_pengguna= '$_SESSION[akun_id]'";
             //perintah menampilkan data dikerjakan
             $tampil = mysqli_query($koneksi, $query);
             if (!$tampil) {
@@ -171,13 +94,17 @@
             }
             //tampilkan seluruh data yang ada pada tabel user
             while ($data = mysqli_fetch_array($tampil)) {
+              $tampils = mysqli_query($koneksi, "SELECT COUNT(nis) jml FROM kelas_siswa WHERE kode_kelas = '$data[kode_kelas]'");
+              while ($dtkl = mysqli_fetch_array($tampils)) {
             ?>
               <tr>
                 <td><?= $data['nama_kelas'] ?></td>
+                <td><?= $dtkl['jml'] ?></td>
                 <td><?= $data['nama_mp'] ?></td>
               </tr>
             <?php
             }
+          }
             ?>
           </tbody>
         </table>

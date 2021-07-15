@@ -17,7 +17,7 @@
 			// dengan cara mengambil substring mulai dari karakter ke-1 diambil 6 karakter
 			// misal 'S001', akan diambil '001'
 			// setelah substring bilangan diambil lantas dicasting menjadi integer
-			$noUrut = (int) substr($kode, 2, 3);
+			$noUrut = (int) substr($kode, strlen($char), 3);
 			 // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
 			$noUrut++;
 			 // membentuk kode anggota baru
@@ -26,6 +26,7 @@
 			// atau misal sprintf("%03s", 1); maka akan dihasilkan string '001'
 			$kode = $char . sprintf("%03s", $noUrut);
 			echo $kode;
+			// echo ;
 	    }
 
 ?>

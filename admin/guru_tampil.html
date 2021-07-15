@@ -26,7 +26,6 @@
             	</thead>
               <tbody>
               	<?php
-                include('../conn/koneksi.php');
                 $tampil = "SELECT * FROM dtguru ORDER BY nama_guru ASC";
                 //perintah menampilkan data dikerjakan
                 $sql = mysqli_query($koneksi,$tampil);

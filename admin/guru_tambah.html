@@ -21,30 +21,28 @@
             <!-- form start -->
             <form role="form" action="guru_insert.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
               <div class="box-body">
-                <div class="col-xs-6 form-group">
-                  <label class="control-label"><small>ID Guru</small></label>
-                  <input type="text" class="form-control" name="id_guru" readonly value="<?php
+                <div class="col-xs-12 form-group">
+                  <h4>Isi Form Data Guru</h4>
+                </div>
+                
+                <input type="hidden" class="form-control" name="id_guru" readonly value="<?php
                   include "../kode_otomatis.php";
                   Kode_Auto("G","SELECT max(id_guru) as maxKode FROM dtGuru");
                   ?>">
-                </div>
-                <div class="col-xs-6 form-group">
-                  <label class="control-label"><small>ID Pengguna</small></label>
-                  <input type="text" class="form-control" name="id_pengguna" readonly value="<?php
+                  <input type="hidden" class="form-control" name="id_pengguna" readonly value="<?php
                   Kode_Auto("U","SELECT max(id_pengguna) as maxKode FROM users");
                   ?>">
-                </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>NIP</small></label>
-                  <input type="text" class="form-control" name="nip" placeholder="NIP Guru">
+                  <input type="text" class="form-control" name="nip" placeholder="Masukkan Nomor Induk Pegawai">
                 </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>Nama</small></label>
-                  <input type="text" class="form-control" name="nama" placeholder="Nama Guru">
+                  <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Guru">
                 </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>Alamat</small></label>
-                  <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                  <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat">
                 </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>Tanggal Lahir</small></label>
@@ -60,30 +58,49 @@
                 </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>Agama</small></label>
-                  <input type="text" class="form-control" name="agama" placeholder="Agama">
+                  <input type="text" class="form-control" name="agama" placeholder="Masukkan Agama">
                 </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>No Telpon</small></label>
-                  <input type="text" class="form-control" name="telpon" placeholder="No Telpon">
-                </div>
-                <div class="col-xs-6 form-group">
-                  <label class="control-label"><small>Status</small></label>
-                  <select name="status" class="form-control selectpicker show-tick" data-live-search="true">
-                      <option value="">-- Pilih Status --</option>
-                      <option value="Aktif">Aktif</option>
-                      <option value="Non-aktif">Non Aktif</option>
-                    </select>
+                  <input type="text" class="form-control" name="telpon" placeholder="Masukkan No Telpon">
                 </div>
                 <div class="col-xs-6 form-group">
                   <label class="control-label"><small>Username</small></label>
-                  <input type="text" class="form-control" name="username" placeholder="Username">
+                  <input type="text" class="form-control" name="username" placeholder="Masukkan Username">
                 </div>
                 <div class="col-xs-6 form-group">
                   <label for="exampleInputPassword1"><small>Password</small></label>
-                  <input type="password" class="form-control" name="password" placeholder="Password">
+                  <input type="password" class="form-control" name="password" placeholder="Masukkan Password">
                 </div>
               </div>
               <!-- /.box-body -->
+              <div class="box-body">
+                <div class="col-xs-12 form-group">
+                  <h4>Tentukan Mata Pelajaran Guru</h4>
+                </div>
+                <?php
+                $tampils = "SELECT * FROM kelas ORDER BY nama_kelas ASC";
+                $sqls = mysqli_query($koneksi,$tampils);
+                while($dtkl = mysqli_fetch_array($sqls))
+                 { ?>
+                <div class="col-xs-12 form-group">
+                  <div class="card-header">Kelas <?=$dtkl['nama_kelas']?></div>
+                </div>
+                <?php
+                $tampil = "SELECT * FROM dtmapel ORDER BY nama_mp ASC";
+                $sql = mysqli_query($koneksi,$tampil);
+                while($data = mysqli_fetch_array($sql))
+                 { ?>
+                <div class="col-xs-6 form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="mapel[]" value="<?=$dtkl['kode_kelas'] . '-' . $data['kode_mp']?>" id="<?=$dtkl['kode_kelas'] . '-' . $data['kode_mp']?>">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <?=$data['nama_mp']?>
+                    </label>
+                  </div>
+                </div>
+                 <?php } } ?>
+              </div>
 
               <div class="box-footer">
                 <a class="btn waves-effect waves-light">

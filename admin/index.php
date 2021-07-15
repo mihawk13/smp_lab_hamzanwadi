@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../conn/koneksi.php');
 if ($_SESSION['level'] != "admin") {
   header("Location: ../login.php");
 }
