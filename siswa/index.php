@@ -164,16 +164,16 @@ if ($_SESSION['level'] != "siswa") {
 
   <script src="../dist/js/adminlte.min.js"></script>
 
-  <script src="../dist/js/pages/dashboard.js"></script>
-  <script src="../dist/js/demo.js"></script>
+  <!-- <script src="../dist/js/pages/dashboard.js"></script>
+  <script src="../dist/js/demo.js"></script> -->
   <!-- Page level plugin JavaScript-->
-  <script src="../vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- <script src="../vendor/datatables/dataTables.bootstrap4.js"></script> -->
   <!-- Page level plugin JavaScript-->
   <script type="text/javascript" src="../vendor/datatables/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="../vendor/datatables/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="../vendor/datatables/buttons.html5.min.js"></script>
   <script type="text/javascript" src="../vendor/datatables/dataTables.buttons.min.js"></script>
-  <script type="text/javascript" src="../vendor/datatables/buttons.flash.min.js"></script>
+  <!-- <script type="text/javascript" src="../vendor/datatables/buttons.flash.min.js"></script> -->
   <script type="text/javascript" src="../vendor/datatables/pdfmake.min.js"></script>
   <script type="text/javascript" src="../vendor/datatables/jszip.min.js"></script>
   <script type="text/javascript" src="../vendor/datatables/vfs_fonts.js"></script>
@@ -183,25 +183,28 @@ if ($_SESSION['level'] != "siswa") {
       $('#dataTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
-          'copyHtml5',
-          'excelHtml5',
-          'csvHtml5',
           'pdfHtml5'
-          // {
-          //     extend: 'pdfHtml5',
-          //     orientation: 'landscape',
-          //     pageSize: 'LEGAL'
-          // }
         ]
+      });
+
+      $('#semester').on('change', function() {
+        var value = this.value;
+        var smt = value.substr(6, value.length - 1);
+        var ta = value.substr(0, 5);
+        // alert(ta);
+        $('#smt').val(smt);
+        $('#ta').val(ta);
+        $('#pilih').submit();
+
       });
     });
   </script>
 
 
   <!-- CustomJS -->
-  <script type="text/javascript" src="data_nilai.js"></script>
-  <script type="text/javascript" src="rata_rata.js"></script>
-  <script type="text/javascript" src="nilai.js"></script>
+  <!-- <script type="text/javascript" src="data_nilai.js"></script> -->
+  <!-- <script type="text/javascript" src="rata_rata.js"></script> -->
+  <!-- <script type="text/javascript" src="nilai.js"></script> -->
 </body>
 
 </html>
