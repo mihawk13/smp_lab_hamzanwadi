@@ -123,7 +123,7 @@ if($_SESSION['level'] != "guru"){
       $page = "";
     }
       if($page == "") {
-        include('dashboard.html');
+        include('dashboard.php');
       } else if($page =="viewData"){
         include('guru_tampil.html');
       } else if($page =="editData"){
