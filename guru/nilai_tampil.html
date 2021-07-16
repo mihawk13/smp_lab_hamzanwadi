@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <link rel="stylesheet" type="text/css" href="../vendor/datatables/jquery.dataTables.min.css">
-  <link rel="stylesheet" type="text/css" href="../vendor/datatables/buttons.dataTables.min.css">
-<style>
-th {
-    text-align: center;
-}
-th.p {
-    background-color: rgba(12, 46, 238, 0.473);
-}
-th.k {
-    background-color: rgba(200, 209, 75, 0.342);
-} 
-</style>
+    <link rel="stylesheet" type="text/css" href="../vendor/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/datatables/buttons.dataTables.min.css">
+    <style>
+        th {
+            text-align: center;
+        }
+        
+        th.p {
+            background-color: rgba(12, 46, 238, 0.473);
+        }
+        
+        th.k {
+            background-color: rgba(200, 209, 75, 0.342);
+        }
+    </style>
 </head>
+
 <body>
-<script type="text/javascript" language="Javascript1.2">
-          function pilih(smt){
-            if(smt=='0'){
-              location.replace("index.php?page=viewNilai");
-            }else{
-              location.replace("index.php?page=viewNilai&smt="+smt);
+    <script type="text/javascript" language="Javascript1.2">
+        function pilih(smt) {
+            if (smt == '0') {
+                location.replace("index.php?page=viewNilai");
+            } else {
+                location.replace("index.php?page=viewNilai&smt=" + smt);
             }
-          }
-        </script>
-<div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.php">Dashboard</a>
-        </li>
-        <?php 
+        }
+    </script>
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.php">Dashboard</a>
+            </li>
+            <?php 
          include"../conn/koneksi.php";
         
         echo'<li class="breadcrumb-item active">Data Nilai Siswa</li>'
         ?>
-      </ol>
-            <div class="col-xs-6 form-group">
-          <select name="smt" id="smt" onchange="pilih(this.value)" class="form-control">
+        </ol>
+        <div class="col-xs-6 form-group">
+            <select name="smt" id="smt" onchange="pilih(this.value)" class="form-control">
             <?php 
             if(!isset($_GET['smt'])){ ?>
               <option value="0" selected>Pilih Semester</option>
@@ -55,7 +59,7 @@ th.k {
             <?php } ?>
           </select>
 
-          </div>
+        </div>
         <?php
         include"../conn/koneksi.php";
                 if(isset($_GET['smt'])){
@@ -83,90 +87,171 @@ th.k {
                   exit();
                 }
         ?>
-        </div>
-         <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i> Nilai Siswa</div>
+    </div>
+    <div class="card mb-3" style="margin-left: 30px;">
+        <div class="card-header"><i class="fa fa-table"></i> Nilai Siswa</div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="display table table-bordered" id="dataSiswa" width="100%" cellspacing="0">
-              <thead>
-              <tr>
-                <th colspan="5"></th>
-                <th class="p" colspan="3">Aspek Pengetahuan</th>
-                <th class="k" colspan="3">Aspek Keterampilan</th>
-              </tr>
+            <div class="table-responsive">
+                <table class="display table table-bordered" id="dataSiswa" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th colspan="5"></th>
+                            <th class="p" colspan="3">Aspek Pengetahuan</th>
+                            <th class="k" colspan="3">Aspek Keterampilan</th>
+                        </tr>
 
-                  <tr>
-                  <th width=7%>NIS</th>
-                  <th width=15%>Nama</th>
-                  <th width=5%>Kelas</th>
-                  <th width=5%>Semester</th>
-                  <th width=10%>Mata Pelajaran</th>
-                  <th class="p" width=7%>Total</th>                  
-                  <th class="p" width=7%>Rata-Rata</th>
-                  <th class="p" width=7%>Huruf</th>
-                  <th class="k" width=7%>Total</th>                  
-                  <th class="k" width=7%>Rata-Rata</th>
-                  <th class="k" width=7%>Huruf</th></tr>
-              </thead>
-              <tbody>
-                <?php
-                //tampilkan seluruh data yang ada pada tabel user
-                while($data=mysqli_fetch_array($tampil)){
-                 ?>
-                 <tr>
-                 <td><?php echo $data['nis']?></td>
-                 <td><?php echo $data['nama_siswa']?></td>
-                 <td><?php echo $data['nama_kelas']?></td>
-                 <td><?php echo $data['semester'];?></td>
-                 <td><?php echo $data['nama_mp']?></td>
-                 <td><?php echo $data['total_peng']?></td>
-                 <td><?php echo $data['rata_peng']?></td>
-                 <td><?php echo $data['konversi_peng']?></td>
-                 <td><?php echo $data['total_terampil']?></td>
-                 <td><?php echo $data['rata_terampil']?></td>
-                 <td><?php echo $data['konversi_terampil']?></td>
-                 </tr>
-                <?php
-                }
-                ?>
-              </tbody>
-            </table>
-            
-            <div class="box-footer">
-              <a href="?page=inputNilai" name="input" class="btn btn-info"><i class="fa fa-plus"></i>   Input Nilai</a>
-          </div>
-          </div>
+                        <tr>
+                            <th width=7%>NIS</th>
+                            <th width=15%>Nama</th>
+                            <th width=5%>Kelas</th>
+                            <th width=5%>Semester</th>
+                            <th width=10%>Mata Pelajaran</th>
+                            <th class="p" width=7%>Total</th>
+                            <th class="p" width=7%>Rata-Rata</th>
+                            <th class="p" width=7%>Huruf</th>
+                            <th class="k" width=7%>Total</th>
+                            <th class="k" width=7%>Rata-Rata</th>
+                            <th class="k" width=7%>Huruf</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                  //tampilkan seluruh data yang ada pada tabel user
+                  while($data=mysqli_fetch_array($tampil)){
+                  ?>
+                            <tr>
+                                <td>
+                                    <?= $data['nis']?>
+                                </td>
+                                <td>
+                                    <?= $data['nama_siswa']?>
+                                </td>
+                                <td>
+                                    <?= $data['nama_kelas']?>
+                                </td>
+                                <td>
+                                    <?= $data['semester'];?>
+                                </td>
+                                <td>
+                                    <?= $data['nama_mp']?>
+                                </td>
+                                <td>
+                                    <?= $data['total_peng']?>
+                                </td>
+                                <td>
+                                    <?= $data['rata_peng']?>
+                                </td>
+                                <td>
+                                    <?= $data['konversi_peng']?>
+                                </td>
+                                <td>
+                                    <?= $data['total_terampil']?>
+                                </td>
+                                <td>
+                                    <?= $data['rata_terampil']?>
+                                </td>
+                                <td>
+                                    <?= $data['konversi_terampil']?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                    </tbody>
+                </table>
+
+                <div class="box-footer">
+                    <a href="?page=inputNilai" class="btn btn-info"><i class="fa fa-plus"></i> Input Nilai</a>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#upload"><i class="fa fa-upload"></i> Upload Nilai</button>
+                    <div id="upload" class="modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="nilai_upload.php" method="post" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Upload Nilai</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Kode Guru -->
+                                        <input type="hidden" name="id_jadwal" id="id_jadwal" />
+                                        <input type="hidden" name="id_guru" id="id_guru" value="<?= $_SESSION['id_guru']; ?>" />
+                                        <input type="hidden" name="id_nilai" id="id_nilai" value="<?php
+                                        include "../kode_otomatis.php";
+                                        Kode_Auto("NL","SELECT max(id_nilai) as maxKode FROM dtnilai");
+                                        ?>" />
+                                        <!-- Kode Guru -->
+                                        
+                                        <div class="col-xs-6 form-group">
+                                        <label ><small>Semester</small></label>
+                                        <select name="semester" class="form-control" required />
+                                            <option selected disabled> ---- Pilih Semester ---- </option>
+                                            <option value="Ganjil">1 - Ganjil</option>
+                                            <option value="Genap">2 - Genap</option>
+                                        </select>
+                                        </div>
+                                        <div class="col-xs-6 form-group">
+                                        <label ><small>Kelas</small></label>
+                                        <select name="kode_kelas" id="kode_kelas"  class="form-control" required />
+                                        <option selected disabled> ---- Pilih Kelas ---- </option>
+                                        </select>
+                                        </div>
+                                        <div class="col-xs-6 form-group">
+                                        <label><small>Pelajaran</small></label>
+                                        <select name="kode_pelajaran" id="kode_pelajaran" class="form-control" required />
+                                        <option selected disabled> ---- Pilih Pelajaran ---- </option>
+                                        <?php                  
+                                            $tampil = "SELECT DISTINCT(mp.nama_mp),mp.kode_mp FROM dtjadwal AS jd
+                                            INNER JOIN dtmapel AS mp ON jd.kode_mp = mp.kode_mp
+                                            WHERE jd.id_guru = '$_SESSION[id_guru]'";
+                                            $sql = mysqli_query($koneksi,$tampil);
+                                            while($data = mysqli_fetch_array($sql)){
+                                            echo '<option value='.$data['kode_mp'].'>'.$data['nama_mp'].'</option>'; }
+                                            ?>
+                                        </select>
+                                        </div>
+                                        <div class="col-xs-6 form-group">
+                                            <label ><small>KKM</small></label>
+                                            <input readonly type="text" class="form-control " id="kkm" name="kkm" placeholder="KKM">
+                                        </div>
+                                        <div class="col-xs-12 form-group">
+                                            <label>Masukkan File Excel</label>
+                                            <input type="file" max="100" class="form-control " name="file" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
-      </div>
-</div>
-<script type="text/javascript" src="../vendor/datatables/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../vendor/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../vendor/datatables/buttons.html5.min.js"></script>
-<script type="text/javascript" src="../vendor/datatables/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="../vendor/datatables/buttons.flash.min.js"></script>
-<script type="text/javascript" src="../vendor/datatables/pdfmake.min.js"></script>
-<script type="text/javascript" src="../vendor/datatables/jszip.min.js"></script>
-<script type="text/javascript" src="../vendor/datatables/vfs_fonts.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-      $('#dataSiswa').DataTable( {
-          dom: 'Bfrtip',
-          buttons: [
-          'copyHtml5',
-          'excelHtml5',
-          'csvHtml5',
-          'pdfHtml5'
-          // {
-          //     extend: 'pdfHtml5',
-          //     orientation: 'landscape',
-          //     pageSize: 'LEGAL'
-          // }
-          ]
-      } );
-  } );
-</script>
+    </div>
+    </div>
+    <script type="text/javascript" src="../vendor/datatables/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/pdfmake.min.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/jszip.min.js"></script>
+    <script type="text/javascript" src="../vendor/datatables/vfs_fonts.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dataSiswa').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excelHtml5',
+                    'pdfHtml5'
+                    // {
+                    //     extend: 'pdfHtml5',
+                    //     orientation: 'landscape',
+                    //     pageSize: 'LEGAL'
+                    // }
+                ]
+            });
+        });
+    </script>
 </body>
+
 </html>

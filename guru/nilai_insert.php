@@ -45,16 +45,12 @@ include '../conn/koneksi.php';
     $ket_terampil       = $_POST['ketNilai'];
 
     if($id_nilai == "" or $nis == "" or $id_jadwal == "" or $semester == ""){
-        ?><script type="text/javascript">alert("Input Nilai Gagal!!");
-            window.location = "index.php?page=inputNilai";</script><?php
+        echo "<script>alert('Input nilai gagal!');window.location = 'index.php?page=inputNilai';</script>";
     }else{
         $query="INSERT INTO dtnilai VALUES('$id_nilai','$nis','$id_jadwal','$semester',
         '$uh1','$uh2','$uh3','$uh4','$pr1','$pr2','$pr3','$pr4','$rata_uh_pr','$uts','$uas','$total_peng','$rata_peng','$konversi_peng','$ket_peng',
         '$uk1','$uk2','$uk3','$uk4','$ratauk','$pro1','$pro2','$pro3','$pro4','$ratapro','$port1','$port2','$port3','$port4','$rataport',
         '$total_terampil','$rata_terampil','$konversi_terampil','$ket_terampil')";
         $res=mysqli_query($koneksi,$query) or die (mysqli_error($koneksi));
-        ?><script type="text/javascript">alert("Nilai Berhasil Disimpan");
-            window.location = "index.php?page=viewNilai";</script><?php
-        // header('location: index.php?page=viewNilai');
+        echo "<script>alert('Nilai Berhasil Disimpan');window.location = 'index.php?page=viewNilai';</script>";
     }
-?>

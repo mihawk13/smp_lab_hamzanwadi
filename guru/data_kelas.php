@@ -11,7 +11,7 @@ include "../conn/Koneksi.php";
     $jml=mysqli_num_rows($tampil);
     
     if($jml > 0){
-        echo "<option value='0' selected>---- Pilih Kelas ----</option>";
+        echo "<option selected disabled>---- Pilih Kelas ----</option>";
         while($r=mysqli_fetch_array($tampil)){
             echo "<option value=$r[kode_kelas]>$r[nama_kelas]</option>";
         }
